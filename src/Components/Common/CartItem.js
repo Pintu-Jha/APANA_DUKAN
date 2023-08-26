@@ -4,50 +4,81 @@ import {spacing} from '../../Styles/spacing';
 import {textScale} from '../../Styles/responsiveStyles';
 import colors from '../../Utility/colors';
 import {Images} from '../../Utility/imgPath';
-import commonStyle, { APP_PADDING_HORIZONTAL } from '../../Styles/commonStyle';
+import commonStyle from '../../Styles/commonStyle';
 
-const MyProductItem = ({item, onAddToCart, onAddWishlist,index}) => {
+const CartItem = ({
+  item,
+  onRemoveToCart,
+  onAddWishlist,
+  isWishlist,
+  onRemoveToWishlist,
+  onAddToCart,
+}) => {
   return (
-    <View style={[styles.mainContainer,index == 0 && {marginLeft:APP_PADDING_HORIZONTAL}]}>
+    <View style={styles.mainContainer}>
       <Image source={item.image} style={styles.productImg} resizeMode="cover" />
       <Text style={styles.productName}>{item.name}</Text>
 
       <View style={styles.detailContainer}>
         <Text style={styles.price}>{`₹` + item.price}</Text>
-        <TouchableOpacity
-          style={styles.addToCartBtnContainer}
-          onPress={() => {
-            onAddToCart(item);
-          }}>
-          <Text style={styles.btnText}>add to cart</Text>
-        </TouchableOpacity>
+        {isWishlist ? (
+          <TouchableOpacity
+            style={styles.addToCartBtnContainer}
+            onPress={() => {
+              onAddToCart(item);
+            }}>
+            <Text style={styles.btnText}>add to cart</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            style={styles.addToCartBtnContainer}
+            onPress={() => {
+              onRemoveToCart();
+            }}>
+            <Text style={styles.btnText}>remove to cart</Text>
+          </TouchableOpacity>
+        )}
       </View>
-      <TouchableOpacity
-        style={styles.wishListContainer}
-        onPress={() => {
-          onAddWishlist(item);
-        }}>
-        <Image source={Images.IMG_NOTIFICATION} style={styles.wishListImg} />
-      </TouchableOpacity>
+      {isWishlist ? (
+        <TouchableOpacity
+          style={styles.wishListContainer}
+          onPress={() => {
+            onRemoveToWishlist();
+          }}>
+          <Image
+            source={Images.IMG_NOTIFICATION_FILL}
+            style={styles.wishListImg}
+          />
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          style={styles.wishListContainer}
+          onPress={() => {
+            onAddWishlist(item);
+          }}>
+          <Image source={Images.IMG_NOTIFICATION} style={styles.wishListImg} />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
 
-export default MyProductItem;
+export default CartItem;
 
 const styles = StyleSheet.create({
   mainContainer: {
-    width: spacing.WIDTH_240,
-    height: spacing.HEIGHT_320,
+    width: '93%',
+    height: spacing.HEIGHT_400,
     borderRadius: spacing.RADIUS_12,
     backgroundColor: '#fff',
-    marginRight: spacing.MARGIN_20,
     elevation: 5,
     marginBottom: spacing.MARGIN_10,
+    marginTop: spacing.MARGIN_10,
+    alignSelf: 'center',
   },
   productImg: {
     width: '100%',
-    height: spacing.HEIGHT_230,
+    height: spacing.HEIGHT_320,
     borderTopLeftRadius: spacing.RADIUS_12,
     borderTopRightRadius: spacing.RADIUS_12,
   },
@@ -60,7 +91,6 @@ const styles = StyleSheet.create({
   detailContainer: {
     ...commonStyle.flexRow,
     justifyContent: 'space-between',
-    marginTop: spacing.MARGIN_6,
     paddingLeft: spacing.PADDING_10,
     paddingRight: spacing.PADDING_10,
   },
@@ -80,11 +110,11 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   wishListContainer: {
-    width: spacing.WIDTH_46,
-    height: spacing.HEIGHT_46,
+    width: spacing.WIDTH_50,
+    height: spacing.HEIGHT_50,
     backgroundColor: '#fff',
-    borderRadius: spacing.RADIUS_70,
-    elevation: 5,
+    borderRadius: spacing.RADIUS_40,
+    elevation: 4,
     position: 'absolute',
     top: 10,
     right: 10,
@@ -93,5 +123,6 @@ const styles = StyleSheet.create({
   wishListImg: {
     width: spacing.WIDTH_30,
     height: spacing.HEIGHT_30,
+    tintColor: colors.theme,
   },
 });

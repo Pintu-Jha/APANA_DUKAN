@@ -12,6 +12,7 @@ import colors from '../Utility/colors';
 import {textScale} from '../Styles/responsiveStyles';
 import RegularText from '../Components/Common/RegularText';
 import {Images} from '../Utility/imgPath';
+import {useSelector} from 'react-redux';
 
 const Tab = createBottomTabNavigator();
 const tabBarColor = colors.white;
@@ -45,6 +46,8 @@ const tabData = [
 ];
 
 function BottomTabNavigator() {
+  const data = useSelector(state => state);
+  console.log('r ' + data.Cartreducer.length);
   return (
     <View style={{flex: 1}}>
       <Tab.Navigator
@@ -66,14 +69,21 @@ function BottomTabNavigator() {
               name={item.name}
               component={item.component}
               options={{
+                tabBarBadge:
+                  item.name == Utils.Constants.SCREEN_CART
+                    ? data?.Cartreducer?.length
+                    : item.name == Utils.Constants.SCREEN_NOTIFICATION
+                    ? data?.WishlistReducer?.length
+                    : null,
+
                 tabBarIcon: ({focused}) => {
                   return (
                     <View
                       style={{
                         alignItems: 'center',
-                        backgroundColor:focused?colors.black:colors.white,
-                        borderRadius:spacing.RADIUS_40,
-                        padding:spacing.PADDING_8
+                        backgroundColor: focused ? colors.black : colors.white,
+                        borderRadius: spacing.RADIUS_40,
+                        padding: spacing.PADDING_8,
                       }}>
                       <Image
                         source={item.icon}

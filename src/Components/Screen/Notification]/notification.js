@@ -1,12 +1,33 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import {View, Text, FlatList} from 'react-native';
+import React from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import CartItem from '../../Common/CartItem';
+import {addItemToCart, removeItemToWishlist} from '../../../Redux/Action/Action';
 
-const Notification = () => {
+const Cart = () => {
+  const cartData = useSelector(state => state.WishlistReducer);
+  const dispatch = useDispatch();
   return (
-    <View>
-      <Text>N</Text>
+    <View style={{flex: 1}}>
+      <FlatList
+        data={cartData}
+        renderItem={({item, index}) => {
+          return (
+            <CartItem
+              isWishlist={'true'}
+              item={item}
+              onRemoveToWishlist={() => {
+                dispatch(removeItemToWishlist(index));
+              }}
+              onAddToCart={(x) => {
+                dispatch(addItemToCart(x));
+              }}
+            />
+          );
+        }}
+      />
     </View>
-  )
-}
+  );
+};
 
-export default Notification
+export default Cart;

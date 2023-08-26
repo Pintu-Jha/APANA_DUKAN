@@ -6,7 +6,7 @@ import colors from '../../Utility/colors';
 import {Images} from '../../Utility/imgPath';
 import commonStyle, { APP_PADDING_HORIZONTAL } from '../../Styles/commonStyle';
 
-const MyProductItem = ({item, onAddToCart, onAddWishlist,index}) => {
+const ProductListComponentRow = ({item, onAddToCart, onAddWishlist,index}) => {
   return (
     <View style={[styles.mainContainer,index == 0 && {marginLeft:APP_PADDING_HORIZONTAL}]}>
       <Image source={item.image} style={styles.productImg} resizeMode="cover" />
@@ -33,7 +33,7 @@ const MyProductItem = ({item, onAddToCart, onAddWishlist,index}) => {
   );
 };
 
-export default MyProductItem;
+export default ProductListComponentRow;
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     height: spacing.HEIGHT_320,
     borderRadius: spacing.RADIUS_12,
     backgroundColor: '#fff',
-    marginRight: spacing.MARGIN_20,
+    marginRight: APP_PADDING_HORIZONTAL,
     elevation: 5,
     marginBottom: spacing.MARGIN_10,
   },
