@@ -47,7 +47,6 @@ const tabData = [
 
 function BottomTabNavigator() {
   const data = useSelector(state => state);
-  console.log('r ' + data.Cartreducer.length);
   return (
     <View style={{flex: 1}}>
       <Tab.Navigator

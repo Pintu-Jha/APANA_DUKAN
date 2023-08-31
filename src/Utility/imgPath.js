@@ -9,5 +9,7 @@ export const Images = {
     IMG_NOTIFICATION: require('../Assests/Image/love.png'),
     IMG_NOTIFICATION_FILL:require('../Assests/Image/heart_fill.png'),
     IMG_PROFILE: require('../Assests/Image/user.png'),
-    IMG_BANNER:require('../Assests/Image/banner.png')
+    IMG_BANNER:require('../Assests/Image/banner.png'),
+    IMG_SETTING:require('../Assests/Image/settings.png'),
+    IMG_RIGHT_ARROW:require('../Assests/Image/rightArrow.png')
 }

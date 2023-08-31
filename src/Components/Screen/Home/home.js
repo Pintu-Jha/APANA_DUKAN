@@ -18,7 +18,7 @@ import ProductListComponent from '../../module/ProductListComponent';
 import ProductListHeaderText from '../../module/ProductListHeaderText';
 
 const Home = () => {
-  const dispatch = useDispatch();
+
   const [categoryList, setCotegoryList] = useState([]);
   const [tshirtList, setTshirtList] = useState([]);
   const [jeansList, setjeansList] = useState([]);
@@ -41,9 +41,8 @@ const Home = () => {
     setTrouserList(product.category[5].data);
   }, []);
 
-  const item = useSelector(state => state);
 
-  console.log(item);
+
   return (
     <VirtualizedView style={{flex: 1, backgroundColor: colors.grey100}}>
       <Image source={Images.IMG_BANNER} style={styles.bannerImg} />

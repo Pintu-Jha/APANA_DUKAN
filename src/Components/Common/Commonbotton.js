@@ -1,12 +1,11 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {spacing} from '../../Styles/spacing';
-import {create} from 'react-test-renderer';
 
-const Commonbotton = ({textColor, bgColor, title, onPress}) => {
+const Commonbotton = ({textColor, bgColor, title, onPress,commonBtnContainer}) => {
   return (
     <TouchableOpacity
-      style={{...styles.commonBtnContainer, backgroundColor: bgColor}}
+      style={{...styles.commonBtnContainer, backgroundColor: bgColor, ...commonBtnContainer}}
       onPress={() => {
         onPress();
       }}>
