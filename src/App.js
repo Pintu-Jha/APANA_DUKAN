@@ -6,11 +6,7 @@ import MainContainer from './Components/Screen/mainContainer';
 import SplashScreen from 'react-native-splash-screen';
 
 const App = () => {
-  useEffect(() => {
-    setTimeout(() => {
-      SplashScreen.hide();
-    }, 2500);
-  }, []);
+ 
   return (
     <Provider store={store}>
       <MainContainer />
