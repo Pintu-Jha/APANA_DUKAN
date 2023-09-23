@@ -11,5 +11,7 @@ export const Images = {
     IMG_PROFILE: require('../Assests/Image/user.png'),
     IMG_BANNER:require('../Assests/Image/banner.png'),
     IMG_SETTING:require('../Assests/Image/settings.png'),
-    IMG_RIGHT_ARROW:require('../Assests/Image/rightArrow.png')
+    IMG_RIGHT_ARROW:require('../Assests/Image/rightArrow.png'),
+    IMG_SUCCESS:require('../Assests/Image/success.png'),
+    IMG_FAILED:require('../Assests/Image/failed.png')
 }
