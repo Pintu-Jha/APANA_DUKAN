@@ -6,7 +6,7 @@ const colors = {
     lightTheme04: 'rgba(226,55,68,0.4)',
     lightTheme02: 'rgba(226,55,68,0.2)',
 
-    lightTheme: 'rgba(101,189,255,1)',
+    
     secondaryColor: '#16517E',
     thirdThemeColor: '#16517E',
 
