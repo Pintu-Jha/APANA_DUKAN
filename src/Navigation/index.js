@@ -5,7 +5,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Constants}  from '../Utility/imdex';
 import login from '../Components/Screen/Login/login';
 import signup from '../Components/Screen/Signup/signup';
-import home from '../Components/Screen/Home/home';
 import BottomTabNavigator from './BottomTabNavigation';
 import AddAddress from '../Components/Screen/AddAddress/AddAddress';
 import Order from '../Components/Screen/Order/Order';
