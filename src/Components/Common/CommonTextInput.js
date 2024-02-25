@@ -8,12 +8,13 @@ const CommonTextInput = ({value, onChangeText, placeholder, icon, type}) => {
       <Image source={icon} style={styles.textInputImage} />
       <TextInput
         placeholder={placeholder}
+        placeholderTextColor='#000'
         value={value}
         onChangeText={txt => {
           onChangeText(txt);
         }}
         secureTextEntry={type ? true : false}
-        style={{marginLeft: spacing.MARGIN_10}}
+        style={{marginLeft: spacing.MARGIN_10,color:'#000'}}
       />
     </View>
   );
