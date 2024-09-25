@@ -2,15 +2,13 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import * as Utils from '../Utility/imdex';
-import HomeScreen from '../Components/Screen/Home/home';
+import Home from '../Components/Screen/Home/home';
 import SearchScreen from '../Components/Screen/Serarch/Search';
 import NotificationScreen from '../Components/Screen/Notification]/notification';
 import ProfileScreen from '../Components/Screen/Profile/profile';
 import CartScreen from '../Components/Screen/Cart/cart';
 import {spacing} from '../Styles/spacing';
 import colors from '../Utility/colors';
-import {textScale} from '../Styles/responsiveStyles';
-import RegularText from '../Components/Common/RegularText';
 import {Images} from '../Utility/imgPath';
 import {useSelector} from 'react-redux';
 
@@ -21,7 +19,7 @@ const tabData = [
   {
     name: Utils.Constants.SCREEN_HOME,
     icon: Images.IMG_HOME,
-    component: HomeScreen,
+    component: Home,
   },
   {
     name: Utils.Constants.SCREEN_SEARCH,

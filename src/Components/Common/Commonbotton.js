@@ -2,14 +2,23 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {spacing} from '../../Styles/spacing';
 
-const Commonbotton = ({textColor, bgColor, title, onPress,commonBtnContainer,fontSize}) => {
+const Commonbotton = ({
+  textColor,
+  bgColor,
+  title,
+  onPress = () => {},
+  commonBtnContainer,
+  fontSize,
+}) => {
   return (
     <TouchableOpacity
-      style={{...styles.commonBtnContainer, backgroundColor: bgColor, ...commonBtnContainer}}
-      onPress={() => {
-        onPress();
-      }}>
-      <Text style={{color: textColor,fontSize:fontSize}}>{title}</Text>
+      style={{
+        ...styles.commonBtnContainer,
+        backgroundColor: bgColor,
+        ...commonBtnContainer,
+      }}
+      onPress={onPress}>
+      <Text style={{color: textColor, fontSize: fontSize}}>{title}</Text>
     </TouchableOpacity>
   );
 };

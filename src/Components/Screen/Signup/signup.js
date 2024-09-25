@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, Alert, Image, Text, ScrollView} from 'react-native';
+import {StyleSheet, Alert, Image, Text, ScrollView, TouchableOpacity} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CommonTextInput from '../../Common/CommonTextInput';
 import {Images} from '../../../Utility/imgPath';
@@ -8,6 +8,7 @@ import colors from '../../../Utility/colors';
 import {Constants} from '../../../Utility/imdex';
 import {spacing} from '../../../Styles/spacing';
 import {textScale} from '../../../Styles/responsiveStyles';
+import Toast from 'react-native-simple-toast';
 
 const Signup = ({navigation}) => {
   const [username, setUsername] = useState('');
@@ -23,10 +24,9 @@ const Signup = ({navigation}) => {
     }
 
     try {
-      // Check if the user already exists
       const existingUser = await AsyncStorage.getItem(email);
       if (existingUser) {
-        Alert.alert('Error', 'User with this email already exists');
+      Toast.show( 'User with this email already exists',Toast.CENTER);
         return;
       }
 
@@ -36,14 +36,13 @@ const Signup = ({navigation}) => {
         password,
       };
 
-      // Save the user data to AsyncStorage
-      await AsyncStorage.setItem(email, JSON.stringify(newUser));
+      await AsyncStorage.setItem('email', JSON.stringify(newUser));
 
-      Alert.alert('Success', 'Signup successful');
-      // You can navigate to another screen here
+     Toast.show( 'Signup successful',Toast.CENTER);
+      navigation.navigate(Constants.SCREEN_LOGIN);
     } catch (error) {
       console.error('Error signing up:', error);
-      Alert.alert('Error', 'An error occurred during signup');
+      console.error('Error', 'An error occurred during signup');
     }
   };
 
@@ -65,7 +64,10 @@ const Signup = ({navigation}) => {
     }
     handleSignup();
   };
-  console.log(email);
+
+  const onSignin = () => {
+      validate();
+  };
   return (
     <ScrollView style={{flex: 1}}>
       <Image source={Images.IMG_LOGO} style={styles.logoImg} />
@@ -107,22 +109,11 @@ const Signup = ({navigation}) => {
         title={'Sign Up'}
         textColor={colors.white}
         bgColor={colors.black}
-        onPress={() => {
-          if (username && email && password) {
-            navigation.navigate(Constants.SCREEN_HOME);
-          }
-          // else if (!username || !email || !password){
-          //  validate()
-          // }
-          else {
-            validate();
-          }
-        }}
+        onPress={onSignin}
       />
       <Text
         style={styles.navigationForLoginText}
         onPress={() => {
-          navigation.navigate(Constants.SCREEN_LOGIN);
         }}>
         Already have Account?
       </Text>

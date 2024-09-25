@@ -7,15 +7,19 @@ import {
   Image,
 } from 'react-native';
 import React from 'react';
-import {useNavigation} from '@react-navigation/native';
 import {Images} from '../../../Utility/imgPath';
 import colors from '../../../Utility/colors';
 import {spacing} from '../../../Styles/spacing';
 import {textScale} from '../../../Styles/responsiveStyles';
 import {Constants} from '../../../Utility/imdex';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Toast from 'react-native-simple-toast';
 
-const Profile = () => {
-  const navigation = useNavigation();
+const Profile = ({navigation}) => {
+  const handleLogout = async () => {
+    await AsyncStorage.removeItem('email');
+    Toast.show( 'Logout successful');
+  };
   return (
     <View style={{flex: 1}}>
       <View
@@ -73,33 +77,40 @@ const Profile = () => {
             },
             {title: 'Help and Support', isIcon: false, disabled: true},
             {title: 'Share app', isIcon: true, disabled: true},
+            {
+              title: 'logout',
+              isIcon: true,
+              disabled: false,
+              onPress: handleLogout,
+            },
           ]}
           renderItem={({item, index}) => {
             return (
-              
-                <TouchableOpacity
-                  style={Styles.flatlistItem}
-                  disabled={item?.disabled}
-                  onPress={() => navigation?.navigate(item.navigateTo)}>
-                  <View style={Styles.allText}>
-                    <Text
-                      style={{
-                        color: colors.black,
-                        fontSize: textScale(16),
-                        marginLeft: spacing.MARGIN_16,
-                        marginTop: spacing.MARGIN_14,
-                      }}>
-                      {item.title}
-                    </Text>
-                    {item.isIcon ? (
-                      <Image
-                        source={Images.IMG_RIGHT_ARROW}
-                        style={Styles.iconStyle}
-                      />
-                    ) : null}
-                  </View>
-                </TouchableOpacity>
-
+              <TouchableOpacity
+                style={Styles.flatlistItem}
+                disabled={item?.disabled}
+                onPress={() => {
+                  if (item.onPress) item.onPress(); 
+                  if (item.navigateTo) navigation.navigate(item.navigateTo);
+                }}>
+                <View style={Styles.allText}>
+                  <Text
+                    style={{
+                      color: colors.black,
+                      fontSize: textScale(16),
+                      marginLeft: spacing.MARGIN_16,
+                      marginTop: spacing.MARGIN_14,
+                    }}>
+                    {item.title}
+                  </Text>
+                  {item.isIcon ? (
+                    <Image
+                      source={Images.IMG_RIGHT_ARROW}
+                      style={Styles.iconStyle}
+                    />
+                  ) : null}
+                </View>
+              </TouchableOpacity>
             );
           }}
         />

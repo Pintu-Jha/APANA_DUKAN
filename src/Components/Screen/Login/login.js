@@ -1,4 +1,4 @@
-import {View, Text, Image, ScrollView, StyleSheet} from 'react-native';
+import {View, Text, Image, ScrollView, StyleSheet, Alert} from 'react-native';
 import React, {useState} from 'react';
 import {textScale} from '../../../Styles/responsiveStyles';
 import colors from '../../../Utility/colors';
@@ -7,6 +7,8 @@ import CommonTextInput from '../../Common/CommonTextInput';
 import {Images} from '../../../Utility/imgPath';
 import Commonbotton from '../../Common/Commonbotton';
 import {Constants} from '../../../Utility/imdex';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Toast from 'react-native-simple-toast';
 
 const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -21,26 +23,34 @@ const Login = ({navigation}) => {
 
     try {
       // Retrieve user data from AsyncStorage
-      const userData = await AsyncStorage.getItem(email);
-      console.log(email);
+      const userData = await AsyncStorage.getItem('email');
+      const parsedData = JSON.parse(userData);
+      console.log('Retrieved data:', parsedData);
 
       if (!userData) {
-        Alert.alert('Error', 'User not found');
+       Toast.show('User not found',Toast.CENTER);
         return;
       }
 
       const user = JSON.parse(userData);
 
       if (user.password === password) {
-        Alert.alert('Success', 'Login successful');
-        // You can navigate to another screen here
+        Toast.show('Login successful',Toast.CENTER);
       } else {
-        Alert.alert('Error', 'Invalid password');
+       Toast.show('Somthing Went Wrong',Toast.CENTER);
+      }      
+      if (user) {
+        // Navigate to the home screen or another authenticated area
+        navigation.navigate(Constants.SCREEN_BOTTOMTABNAVIGATION);
+      } else {
+        // Handle authentication failure (show error message, etc.)
+        console.log('Authentication failed');
       }
     } catch (error) {
       console.error('Error logging in:', error);
-      Alert.alert('Error', 'An error occurred during login');
+      console.error('Error', 'An error occurred during login');
     }
+   
   };
   const validate = () => {
     if (email == '') {
@@ -87,11 +97,7 @@ const Login = ({navigation}) => {
         textColor={colors.white}
         bgColor={colors.black}
         onPress={() => {
-          if (email && password) {
-            navigation.navigate(Constants.SCREEN_BOTTOMTABNAVIGATION);
-          } else {
-            handleLogin();
-          }
+          validate();
         }}
       />
       <Text

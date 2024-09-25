@@ -12,7 +12,6 @@ import {spacing} from '../../../Styles/spacing';
 import colors from '../../../Utility/colors';
 import {product} from '../../Common/Product';
 import VirtualizedView from '../../Common/VirtualizedView';
-import {useDispatch, useSelector} from 'react-redux';
 import {APP_PADDING_HORIZONTAL} from '../../../Styles/commonStyle';
 import ProductListComponent from '../../module/ProductListComponent';
 import ProductListHeaderText from '../../module/ProductListHeaderText';

@@ -2,6 +2,7 @@ import {
   ADD_TO_CART,
   ADD_TO_ORDER,
   ADD_TO_WISHLIST,
+  CHECK_USER,
   REMOVE_TO_CART,
   REMOVE_TO_ORDER,
   REMOVE_TO_WISHLIST,
@@ -36,3 +37,8 @@ export const  removeToOrder =index => ({
   type: REMOVE_TO_ORDER,
   payload: index,
 });
+
+// export const  checkUser =data => ({
+//   type: CHECK_USER,
+//   payload: data,
+// });
